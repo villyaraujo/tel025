@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="pt-BR"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>TEL025 – Resumos e Quiz</title>
+<style>
+:root{--bg:#0f172a;--c:#1e293b;--t:#e2e8f0;--m:#94a3b8;--a:#38bdf8;--ok:#22c55e;--no:#ef4444}
+*{box-sizing:border-box}body{margin:0;font:16px/1.5 system-ui,sans-serif;background:var(--bg);color:var(--t)}
+header{padding:14px 16px;background:var(--c);position:sticky;top:0;z-index:5}
+h1{margin:0;font-size:18px}nav{display:flex;gap:6px;margin-top:8px;flex-wrap:wrap}
+nav button,.btn{background:#334155;color:var(--t);border:0;border-radius:8px;padding:9px 13px;font-size:15px;cursor:pointer}
+nav button.on,.btn.p{background:var(--a);color:#042}
+main{padding:14px;max-width:860px;margin:auto}section{display:none}section.on{display:block}
+.card{background:var(--c);border-radius:12px;padding:14px;margin:12px 0}
+.card h3{margin:0 0 8px;color:var(--a);font-size:16px}
+table{border-collapse:collapse;width:100%;font-size:14px}td,th{border:1px solid #334155;padding:5px 7px;text-align:left}th{background:#334155}
+code{background:#0b1220;padding:1px 5px;border-radius:4px;color:#fbbf24;font-size:13px}
+ul{padding-left:20px;margin:6px 0}li{margin:3px 0}
+.opt{display:block;width:100%;text-align:left;margin:7px 0;padding:11px;background:#334155;color:var(--t);border:2px solid transparent;border-radius:8px;font-size:15px}
+.opt.ok{border-color:var(--ok);background:#14532d}.opt.no{border-color:var(--no);background:#7f1d1d}
+select,label{font-size:15px;color:var(--t)}select{background:#334155;border:0;padding:8px;border-radius:8px}
+.bar{height:8px;background:#334155;border-radius:4px;overflow:hidden}.bar i{display:block;height:100%;background:var(--a)}
+.exp{background:#0b1220;padding:10px;border-radius:8px;margin-top:8px;font-size:14px}
+.m{color:var(--m);font-size:13px}
+</style></head><body>
+<header><h1>📡 TEL025 – Redes e Cisco</h1>
+<nav><button data-s="r1" class="on">Apostila 1</button><button data-s="r2">Apostila 2</button><button data-s="r3">Apostila 3</button><button data-s="quiz">🎯 Quiz</button><button data-s="dicas">💡 Estudo</button></nav></header>
+<main>
+<section id="r1" class="on">
+<div class="card"><h3>OSI: camadas e PDUs</h3><table><tr><th>Camada OSI</th><th>PDU</th><th>TCP/IP</th></tr>
+<tr><td>7 Aplicação</td><td>Dados</td><td rowspan=3>Aplicação (dados)</td></tr>
+<tr><td>6 Apresentação</td><td>Dados</td></tr><tr><td>5 Sessão</td><td>Dados</td></tr>
+<tr><td>4 Transporte</td><td>Segmento (TCP) / Datagrama (UDP)</td><td>Transporte</td></tr>
+<tr><td>3 Rede</td><td>Pacote</td><td>Internet</td></tr>
+<tr><td>2 Enlace</td><td>Quadro</td><td rowspan=2>Acesso à rede (quadro / bits)</td></tr><tr><td>1 Física</td><td>Bits</td></tr></table>
+<p class="m">Encapsulamento: dados → segmento → pacote → quadro → bits. PDU = PCI (cabeçalho) + SDU (dados).</p></div>
+<div class="card"><h3>Protocolos e serviços</h3><ul>
+<li><b>ARP</b>: IP → MAC (quadro tipo <code>0x806</code>); <b>gateway</b>: saída da rede local</li>
+<li><b>DHCP</b>: IP automático · <b>DNS</b>: nome → IP (UDP/TCP 53) · <b>FTP</b>: transferência de arquivos</li>
+<li><b>ICMP</b>: ping/erros; <b>TTL</b> decrementa a cada roteador</li>
+<li><b>TFTP</b> UDP 69 · <b>SNMP</b> UDP 161</li></ul></div>
+<div class="card"><h3>IPv4 e sub-redes</h3><ul>
+<li>32 bits, 4 octetos. Classes: A 1–126 (/8), B 128–191 (/16), C 192–223 (/24), D multicast, E reservada</li>
+<li>Hosts úteis = 2<sup>n</sup> − 2 (n = bits de host)</li>
+<li>Sub-redes = 2<sup>bits emprestados</sup></li>
+<li>Passo da sub-rede = 256 − octeto da máscara</li></ul>
+<table><tr><th>CIDR</th><th>Máscara</th><th>Hosts</th></tr><tr><td>/24</td><td>255.255.255.0</td><td>254</td></tr><tr><td>/25</td><td>.128</td><td>126</td></tr><tr><td>/26</td><td>.192</td><td>62</td></tr><tr><td>/27</td><td>.224</td><td>30</td></tr><tr><td>/28</td><td>.240</td><td>14</td></tr><tr><td>/29</td><td>.248</td><td>6</td></tr><tr><td>/30</td><td>.252</td><td>2</td></tr></table>
+<p class="m">Octeto da máscara: 128, 192, 224, 240, 248, 252, 254, 255.</p></div>
+<div class="card"><h3>Cabeamento e Ethernet</h3><ul>
+<li>UTP: 4 pares, RJ-45, T568A/T568B (trocam verde e laranja). Mesmo padrão nas duas pontas = direto; A e B = crossover</li>
+<li>Limite: 90 m permanente + 10 m patch cords = 100 m</li>
+<li>Ethernet usa CSMA/CD (half duplex)</li></ul></div>
+<div class="card"><h3>Cisco IOS – modos</h3><table><tr><th>Modo</th><th>Prompt</th><th>Entrada</th></tr>
+<tr><td>EXEC usuário</td><td><code>&gt;</code></td><td>login</td></tr><tr><td>EXEC privilegiado</td><td><code>#</code></td><td><code>enable</code></td></tr>
+<tr><td>Config global</td><td><code>(config)#</code></td><td><code>configure terminal</code></td></tr>
+<tr><td>Interface</td><td><code>(config-if)#</code></td><td><code>interface fa0/1</code></td></tr>
+<tr><td>Linha</td><td><code>(config-line)#</code></td><td><code>line vty 0 4</code></td></tr></table>
+<ul><li>Salvar: <code>copy running-config startup-config</code> ou <code>write memory</code></li><li>SSH: hostname + domain-name + <code>crypto key generate rsa</code> + usuário + <code>transport input ssh</code></li></ul>
+<p class="m">Apêndices da Apostila 1 (IPv6, UTP, fibra) não são cobrados em avaliação.</p></div>
+</section>
+
+<section id="r2">
+<div class="card"><h3>Dispositivos</h3><table><tr><th>Equip.</th><th>Camada</th><th>Domínios</th></tr>
+<tr><td>Hub</td><td>1</td><td>1 colisão, 1 broadcast</td></tr><tr><td>Switch/Bridge</td><td>2</td><td>colisão por porta; 1 broadcast (sem VLAN)</td></tr>
+<tr><td>Switch L3 / Roteador</td><td>3</td><td>separa broadcast</td></tr></table></div>
+<div class="card"><h3>VLAN e Trunk</h3><ul>
+<li>VLAN = domínio de broadcast lógico; separa redes no mesmo switch</li>
+<li>Porta access (<code>switchport mode access</code> + <code>access vlan N</code>) × trunk (<code>switchport mode trunk</code>, 802.1Q)</li>
+<li>DTP negocia trunk (dynamic auto/desirable)</li>
+<li>Comunicação entre VLANs exige camada 3 (SVI/roteador)</li></ul></div>
+<div class="card"><h3>STP / RSTP / VTP</h3><ul>
+<li>STP evita loops bloqueando links redundantes; RSTP converge mais rápido</li>
+<li>VTP propaga VLANs: modos Server, Client, Transparent</li></ul></div>
+<div class="card"><h3>Ferramentas</h3><ul>
+<li><code>ping</code> (ICMP), <code>traceroute</code>, <code>mtr</code>, <code>route</code>, <code>arp</code></li>
+<li>Sniffers: <code>tcpdump</code>, Wireshark; <code>nmap</code> (varredura de portas)</li>
+<li>SPAN / monitor capture: espelhamento de porta</li></ul>
+<p class="m">Apêndice A2 (STP detalhado, PVST/MSTP, roteamento, router-on-a-stick): confirme com o instrutor se cai na prova.</p></div>
+</section>
+
+<section id="r3">
+<div class="card"><h3>Memórias</h3><table><tr><th>Memória</th><th>Conteúdo</th><th>Volátil?</th></tr>
+<tr><td>ROM</td><td>Bootloader, POST, ROMmon</td><td>não</td></tr><tr><td>Flash</td><td>Imagens do IOS</td><td>não</td></tr>
+<tr><td>NVRAM</td><td>startup-config, config register</td><td>não</td></tr><tr><td>DRAM</td><td>IOS em execução, running-config, buffers</td><td>sim</td></tr>
+<tr><td>CAM</td><td>Tabela MAC (aging 300 s)</td><td>–</td></tr><tr><td>TCAM</td><td>ACLs e QoS</td><td>–</td></tr></table></div>
+<div class="card"><h3>Boot</h3><p>POST → bootstrap → carrega IOS (flash/TFTP/ROM) → carrega config (NVRAM → TFTP → Setup). Falha grave → ROMMON.</p></div>
+<div class="card"><h3>Segurança e gestão</h3><ul>
+<li>Port-security: violation protect / restrict / shutdown (padrão); sticky aprende MACs</li>
+<li>802.1X (porta + RADIUS) · SNMP: agente, MIB, gerente (UDP 161), traps</li>
+<li>HSRP (proprietário): prioridade padrão 100, preempt, track, IP virtual</li></ul></div>
+<div class="card"><h3>Interfaces, EtherChannel, backup</h3><ul>
+<li>Duplex mismatch: colisões e lentidão · <code>clear counters</code> · <code>description</code></li>
+<li>EtherChannel: LACP (802.3ad; active/passive), PAgP (Cisco; auto/desirable), on; até 8 portas iguais</li>
+<li>Backup: <code>copy startup-config tftp</code> · Restore: <code>copy tftp startup-config</code> + reload</li>
+<li>Senha: botão Mode ao ligar → <code>flash_init</code>, renomear config.text, <code>boot</code> · <code>write erase</code></li></ul></div>
+</section>
+
+<section id="quiz">
+<div id="setup" class="card">
+<p><b>Apostilas</b></p>
+<label><input type="checkbox" class="ap" value="1" checked> 1</label> <label><input type="checkbox" class="ap" value="2" checked> 2</label> <label><input type="checkbox" class="ap" value="3" checked> 3</label>
+<p><label><input type="checkbox" id="noapx" checked> Excluir questões de apêndice</label></p>
+<p>Tema: <select id="topic"></select></p>
+<p>Quantidade: <select id="n"><option>10</option><option>20</option><option>40</option><option value="9999">Todas</option></select></p>
+<p><label><input type="checkbox" id="wrong"> Só as que errei</label></p>
+<button class="btn p" id="go">Começar</button> <p id="info" class="m"></p></div>
+<div id="play" style="display:none"><div class="bar"><i id="pb"></i></div><p class="m" id="pc"></p>
+<div class="card"><p id="qt" class="m"></p><p id="qq"><b></b></p><div id="opts"></div><div id="ex"></div><button class="btn p" id="nx" style="display:none;margin-top:10px">Próxima</button></div></div>
+<div id="end" class="card" style="display:none"><h3 id="sc"></h3><button class="btn p" id="again">Novo quiz</button></div>
+</section>
+
+<section id="dicas">
+<div class="card"><h3>Como estudar em 2 semanas</h3><ul>
+<li><b>Dias 1–5:</b> leia cada resumo e faça 20 questões por dia, revendo as erradas</li>
+<li><b>Dias 6–10:</b> use “Só as que errei” e refaça comandos no Packet Tracer/GNS3 (laboratórios “AULA PRÁTICA”)</li>
+<li><b>Dias 11–13:</b> simulados de 40 questões com tempo</li>
+<li>Subnetting: 5 exercícios por dia, no papel</li>
+<li>Flashcards (Anki) com comandos, portas e tabelas</li>
+<li>Explique em voz alta cada tema como se ensinasse alguém</li>
+<li>Mantenha um caderno de erros</li></ul></div></section>
+</main>
+<script>
+const $=s=>document.querySelector(s);
+document.querySelectorAll('nav button').forEach(b=>b.onclick=()=>{document.querySelectorAll('nav button,section').forEach(e=>e.classList.remove('on'));b.classList.add('on');$('#'+b.dataset.s).classList.add('on')});
+let Q=[],cur=[],i=0,hits=0;
+const W=JSON.parse(localStorage.getItem('wrong')||'[]');
+const sh=a=>{a=[...a];for(let i=a.length-1;i>0;i--){const j=Math.random()*(i+1)|0;[a[i],a[j]]=[a[j],a[i]]}return a};
+fetch('questions.json').then(r=>r.json()).then(d=>{Q=d;
+ const ts=[...new Set(d.map(x=>x.t))].sort();$('#topic').innerHTML='<option value="">Todos</option>'+ts.map(t=>`<option>${t}</option>`).join('');
+ $('#info').textContent=d.length+' questões no banco'});
+$('#go').onclick=()=>{
+ const aps=[...document.querySelectorAll('.ap:checked')].map(x=>+x.value);
+ let p=Q.filter(q=>aps.includes(q.a)&&(!$('#noapx').checked||!q.x)&&(!$('#topic').value||q.t==$('#topic').value)&&(!$('#wrong').checked||W.includes(q.q)));
+ cur=sh(p).slice(0,+$('#n').value);i=0;hits=0;
+ if(!cur.length){alert('Nenhuma questão com esses filtros');return}
+ $('#setup').style.display='none';$('#end').style.display='none';$('#play').style.display='block';show()};
+function show(){const q=cur[i];$('#pb').style.width=i/cur.length*100+'%';$('#pc').textContent=`${i+1}/${cur.length} · acertos: ${hits}`;
+ $('#qt').textContent=q.t;$('#qq').innerHTML='<b></b>';$('#qq').firstChild.textContent=q.q;$('#ex').innerHTML='';$('#nx').style.display='none';
+ const o=$('#opts');o.innerHTML='';sh(q.o.map((x,k)=>[x,k==0])).forEach(([x,ok])=>{const b=document.createElement('button');b.className='opt';b.textContent=x;b.onclick=()=>pick(b,ok,q);b.dataset.ok=ok;o.appendChild(b)})}
+function pick(b,ok,q){document.querySelectorAll('.opt').forEach(x=>{x.disabled=true;if(x.dataset.ok=='true')x.classList.add('ok')});
+ if(ok){hits++;const k=W.indexOf(q.q);if(k>=0)W.splice(k,1)}else{b.classList.add('no');if(!W.includes(q.q))W.push(q.q)}
+ localStorage.setItem('wrong',JSON.stringify(W));
+ $('#ex').innerHTML='<div class="exp"></div>';$('#ex').firstChild.textContent=q.e;$('#nx').style.display='inline-block'}
+$('#nx').onclick=()=>{i++;if(i<cur.length)show();else{$('#play').style.display='none';$('#end').style.display='block';$('#sc').textContent=`Resultado: ${hits}/${cur.length} (${Math.round(hits/cur.length*100)}%)`}};
+$('#again').onclick=()=>{$('#end').style.display='none';$('#setup').style.display='block'};
+</script></body></html>
